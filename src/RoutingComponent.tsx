@@ -5,13 +5,26 @@ import { Landing } from './pages/landing';
 import { Login } from './pages/login';
 import { Recuperar } from './pages/recuperar';
 import { useAuth } from './hooks/useAuth';
+import { Films } from './pages/landing/films';
+import { People } from './pages/landing/people';
+import { Starships } from './pages/landing/starships';
+import { Vehicles } from './pages/landing/vehicles';
+import { Planets } from './pages/landing/planets';
+import { Species } from './pages/landing/species';
 
 function RoutingComponent() {
 	const { authState } = useAuth();
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Landing />} />;
+				<Route path="/" element={<Landing />}>
+					<Route path="people" element={<People />} />
+					<Route path="starships" element={<Starships />} />
+					<Route path="vehicles" element={<Vehicles />} />
+					<Route path="planets" element={<Planets />} />
+					<Route path="species" element={<Species />} />
+					<Route path="films" element={<Films />} />
+				</Route>
 				<Route
 					path="/cadastro"
 					element={
