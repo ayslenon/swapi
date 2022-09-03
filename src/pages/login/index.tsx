@@ -11,10 +11,9 @@ export const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { authState, login } = useAuth();
+	const { login } = useAuth();
 
-	function handleLogar(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-		e.preventDefault();
+	function handleLogar() {
 		if (email.includes('@email.com') && password.length === 8) {
 			const Authorization = `Bearer ${btoa(email)} ${btoa(password)}`;
 			const userInfo = { email, Authorization } as userLoginType;

@@ -1,10 +1,12 @@
 import { userType } from './authProvider';
 
-export const users: userType[] = [
+export const authedUsers: userType[] = [
 	{
 		login: {
-			email: 'fulaniho@email.com',
-			Authorization: `Bearer ${btoa('fulaniho@email.com')} ${btoa('12345678')}`,
+			email: 'fulaninho@email.com',
+			Authorization: `Bearer ${btoa('fulaninho@email.com')} ${btoa(
+				'12345678',
+			)}`,
 		},
 		username: 'fulaninho',
 	},

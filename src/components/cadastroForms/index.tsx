@@ -19,18 +19,21 @@ export const CadastroForms = (props: cadastroFormsType) => {
 	const [password, setPassword] = useState('');
 	const [passwordC, setPasswordC] = useState('');
 
-	function handleEnvio(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-		e.preventDefault();
-		if (
-			username.length != 0 &&
-			email.includes('@email.com') &&
-			password.length === 8
-		) {
-			const userInfo = { email, password, username } as userInfoType;
-			props.handleSubmit(userInfo);
-			console.log(
-				'[COMPONENTS] [CadastroForms] [handleEnvio] -> Enviado com sucesso',
-			);
+	function handleEnvio() {
+		if (email.includes('@email.com') && password.length === 8) {
+			if (props.cadastro && username.length != 0) {
+				const userInfo = { email, password, username } as userInfoType;
+				props.handleSubmit(userInfo);
+				console.log(
+					'[COMPONENTS] [CadastroForms] [handleEnvio] -> Cadastrado com sucesso',
+				);
+			} else {
+				const userInfo = { email, password, username } as userInfoType;
+				props.handleSubmit(userInfo);
+				console.log(
+					'[COMPONENTS] [CadastroForms] [handleEnvio] -> Recuperação feita com sucesso',
+				);
+			}
 		} else {
 			console.log(
 				'[COMPONENTS] [CadastroForms] [handleEnvio] -> Alguma info faltando',

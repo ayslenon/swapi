@@ -1,22 +1,26 @@
 import './index.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useEffect, useState } from 'react';
 
 export const Header = () => {
 	const { authState, logout } = useAuth();
+	const [chooseHeader, setChooseHeader] = useState(false);
 
-	function handleLogout(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-		e.preventDefault();
-		logout();
-	}
+	useEffect(() => {
+		if (authState.loggedUser.username.length > 0) setChooseHeader(true);
+		else setChooseHeader(false);
+	}, [authState]);
 
 	return (
 		<div className="header">
 			<div>
-				<h1>SWAPI</h1>
+				<Link to="/">
+					<h1>SWAPI</h1>
+				</Link>
 			</div>
-			{authState.loggedUser.username != '' ? (
-				<div onClick={handleLogout}>
+			{chooseHeader ? (
+				<div onClick={logout}>
 					<h3>Logout</h3>
 				</div>
 			) : (
