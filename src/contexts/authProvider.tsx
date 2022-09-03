@@ -58,7 +58,6 @@ export const authContext = createContext<authContextType>({
 
 export const AuthProvider = ({ children }: authProviderProps) => {
 	const [authState, setAuthState] = useState(initialState);
-
 	useEffect(() => {
 		const user = JSON.parse(
 			sessionStorage.getItem('@SWAPI_user') as string,

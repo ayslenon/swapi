@@ -1,7 +1,12 @@
+import { AuthProvider } from './contexts/authProvider';
 import RoutingComponent from './RoutingComponent';
 
 function App() {
-	return <RoutingComponent />;
+	return (
+		<AuthProvider>
+			<RoutingComponent />;
+		</AuthProvider>
+	);
 }
 
 export default App;

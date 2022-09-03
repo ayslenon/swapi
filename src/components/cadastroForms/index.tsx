@@ -3,13 +3,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-export interface userInfoType {
-	email: string;
-	password: string;
-}
+import { userCadastroType } from '../../contexts/authProvider';
 export interface cadastroFormsType {
-	handleSubmit: (args: userInfoType) => void;
+	handleSubmit: (args: userCadastroType) => void;
 	cadastro: boolean;
 }
 
@@ -22,13 +18,13 @@ export const CadastroForms = (props: cadastroFormsType) => {
 	function handleEnvio() {
 		if (email.includes('@email.com') && password.length === 8) {
 			if (props.cadastro && username.length != 0) {
-				const userInfo = { email, password, username } as userInfoType;
+				const userInfo = { email, password, username } as userCadastroType;
 				props.handleSubmit(userInfo);
 				console.log(
 					'[COMPONENTS] [CadastroForms] [handleEnvio] -> Cadastrado com sucesso',
 				);
 			} else {
-				const userInfo = { email, password, username } as userInfoType;
+				const userInfo = { email, password, username } as userCadastroType;
 				props.handleSubmit(userInfo);
 				console.log(
 					'[COMPONENTS] [CadastroForms] [handleEnvio] -> Recuperação feita com sucesso',
