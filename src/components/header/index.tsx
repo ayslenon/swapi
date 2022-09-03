@@ -14,11 +14,9 @@ export const Header = () => {
 
 	return (
 		<div className="header">
-			<div>
-				<Link to="/">
-					<h1>SWAPI</h1>
-				</Link>
-			</div>
+			<Link to="/">
+				<h1>SWAPI</h1>
+			</Link>
 			{chooseHeader ? (
 				<div onClick={logout}>
 					<h3>Logout</h3>

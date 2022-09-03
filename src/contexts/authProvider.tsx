@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { authedUsers } from './authedUsers';
-
+import { toast } from 'react-toastify';
 export interface userCadastroType {
 	email: string;
 	password: string;
@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: authProviderProps) => {
 			(authedUser) => authedUser.login.email == newUser.email,
 		);
 		if (user !== undefined) {
+			toast.error('Usuário já cadastrado');
 			console.log('[AUTH CONTEXT] [cadastrar] -> usuário já cadastrado');
 		} else {
 			const authedUsers = authState.authedUsers;
@@ -87,6 +88,7 @@ export const AuthProvider = ({ children }: authProviderProps) => {
 			authedUsers.push(newAuthedUser);
 			const newState = { authedUsers, loggedUser: authState.loggedUser };
 			setAuthState(newState);
+			toast.success('Usuário cadastrado com sucesso');
 			console.log(
 				'[AUTH CONTEXT] [cadastrar] -> usuário cadastrado com sucesso',
 			);
@@ -94,27 +96,27 @@ export const AuthProvider = ({ children }: authProviderProps) => {
 	}
 
 	function login(u: userLoginType) {
-		console.log(u);
 		const user = authState.authedUsers.find((authedUser) => {
 			return (
 				authedUser.login.email == u.email &&
 				authedUser.login.Authorization == u.Authorization
 			);
 		});
-		console.log('quem quer logar', user);
-		console.log('quem pode logar', authState.authedUsers);
 		if (user !== undefined) {
 			const authedUsers = authState.authedUsers;
 			const loggedUser = user;
-			console.log('usuario a ser logado', loggedUser);
 			const newState = {
 				authedUsers,
 				loggedUser,
 			} as authStateType;
 			setAuthState(newState);
 			sessionStorage.setItem('@SWAPI_user', JSON.stringify(user));
+			toast.success('Login realziado com sucesso');
 			console.log('[AUTH CONTEXT] [login] -> usuário logado com sucesso');
-		} else console.log('[AUTH CONTEXT] [login] -> usuário não cadastrado');
+		} else {
+			toast.error('Usuário não cadastrado ou senha incorreta');
+			console.log('[AUTH CONTEXT] [login] -> usuário não cadastrado');
+		}
 	}
 
 	function logout() {
@@ -128,6 +130,7 @@ export const AuthProvider = ({ children }: authProviderProps) => {
 		};
 		setAuthState(newState);
 		sessionStorage.removeItem('@SWAPI_user');
+		toast.success('Logout realizado com sucesso');
 		console.log('[AUTH CONTEXT] [logout] -> usuário deslogado com sucesso');
 	}
 
@@ -136,6 +139,7 @@ export const AuthProvider = ({ children }: authProviderProps) => {
 			(authedUser) => authedUser.login.email == user.email,
 		);
 		if (userExists === undefined) {
+			toast.error('Usuário não encontrado');
 			console.log('[AUTH CONTEXT] [redefinirLogin] -> usuário não cadastrado');
 		} else {
 			const index = authState.authedUsers.indexOf(userExists);
@@ -154,14 +158,13 @@ export const AuthProvider = ({ children }: authProviderProps) => {
 			} as authStateType;
 			setAuthState(newState);
 			sessionStorage.setItem('@SWAPI_user', JSON.stringify(newUserInfo));
+			toast.success('Senha alterada com sucesso');
 			console.log(
 				'[AUTH CONTEXT] [redefinirLogin] -> usuário atualizado com sucesso',
 			);
 		}
 	}
-	useEffect(() => {
-		console.log('auth state mudou', authState);
-	}, [authState]);
+
 	return (
 		<authContext.Provider
 			value={{ authState, cadastrar, login, logout, redefinirLogin }}

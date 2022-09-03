@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './index.css';
 
 export const Filtro = () => {
 	const [search, setSearch] = useState('');
