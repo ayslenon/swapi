@@ -3,6 +3,9 @@ import { starshipsSchema } from '../../utils/apiSchemas';
 import { swapi } from '../../config/api';
 import './index.css';
 import Pagination from '@mui/material/Pagination';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 interface response {
 	results: starshipsSchema[];
@@ -13,6 +16,8 @@ interface response {
 
 export const Starships = () => {
 	const [starships, setStarships] = useState({} as response);
+	const { authState } = useAuth();
+	const navigate = useNavigate();
 	useEffect(() => {
 		if (JSON.stringify(starships) === '{}')
 			swapi.get('starships').then((res) => {
@@ -33,6 +38,16 @@ export const Starships = () => {
 		});
 	}
 
+	function handleClick(
+		e: React.ChangeEvent<unknown>,
+		starship: starshipsSchema,
+	) {
+		if (authState.loggedUser.username != '') {
+			const id = starship.url.split('/');
+			navigate(`/starships/${id[id.length - 2]}`);
+		} else toast.error('Por favor, faça login antes de ver os detalhes');
+	}
+
 	return (
 		<>
 			<Pagination
@@ -46,7 +61,11 @@ export const Starships = () => {
 			<div className="wrapper">
 				{starships.results?.map((result, index) => {
 					return (
-						<div key={index} className="item">
+						<div
+							key={index}
+							className="item"
+							onClick={(e) => handleClick(e, result)}
+						>
 							<h3>Nome: {result.name}</h3>
 							<h3>Modelo: {result.model}</h3>
 							<h3>Classe: {result.starship_class}</h3>
@@ -54,6 +73,7 @@ export const Starships = () => {
 					);
 				})}
 			</div>
+			<Outlet />
 		</>
 	);
 };

@@ -1,0 +1,22 @@
+.modal {
+  background-color: gray;
+  border: 2px solid black;
+  border-radius: 30px;
+  position: fixed;
+  top:15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  align-items: center;
+  justify-content: center;
+  transition: all 4s;
+  display: flex;
+  flex-direction: column;
+}
+h4 {
+  display: inline;
+  justify-content: center;
+  color: white;
+  padding: 0;
+  margin: 5px auto;
+}

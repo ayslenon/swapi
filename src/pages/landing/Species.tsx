@@ -3,6 +3,8 @@ import { speciesSchema } from '../../utils/apiSchemas';
 import { swapi } from '../../config/api';
 import './index.css';
 import Pagination from '@mui/material/Pagination';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../hooks/useAuth';
 
 interface response {
 	results: speciesSchema[];
@@ -13,6 +15,7 @@ interface response {
 
 export const Species = () => {
 	const [species, setSpecies] = useState({} as response);
+	const { authState } = useAuth();
 	useEffect(() => {
 		if (JSON.stringify(species) === '{}')
 			swapi.get('species').then((res) => {
@@ -33,6 +36,11 @@ export const Species = () => {
 		});
 	}
 
+	function handleClick(e: React.ChangeEvent<unknown>, result: speciesSchema) {
+		if (authState.loggedUser.username != '') {
+		} else toast.error('Por favor, faça login antes de ver os detalhes');
+	}
+
 	return (
 		<>
 			<Pagination
@@ -46,7 +54,11 @@ export const Species = () => {
 			<div className="wrapper">
 				{species.results?.map((result, index) => {
 					return (
-						<div key={index} className="item">
+						<div
+							key={index}
+							className="item"
+							onClick={(e) => handleClick(e, result)}
+						>
 							<h3>Nome: {result.name}</h3>
 							<h3>Expectativa de vida: {result.average_lifespan}</h3>
 							<h3>Altura média (cm): {result.average_height}</h3>
