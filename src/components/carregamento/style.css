@@ -1,0 +1,52 @@
+.container {
+	width: 100% !important;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #121421;
+	z-index: 10;
+}
+
+.loading {
+	width: 60px;
+	height: 60px;
+	animation: loading ease-in-out 1s infinite;
+}
+
+circle.circle {
+	width: 50px;
+	height: 50px;
+	fill: none;
+	stroke-width: 5px;
+	stroke: #fff;
+	stroke-dasharray: 157px;
+	animation: strokeOffset ease-in-out 1s infinite;
+}
+
+@keyframes loading {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(1turn);
+	}
+}
+
+@keyframes strokeOffset {
+	0% {
+		stroke-dashoffset: 5px;
+	}
+	50% {
+		stroke-dashoffset: 40px;
+	}
+
+	100% {
+		stroke-dashoffset: 10px;
+	}
+}

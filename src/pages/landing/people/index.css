@@ -1,0 +1,18 @@
+.wrapper {
+  display: grid;
+  margin: 50px 30px 80px 30px;
+  grid-template-columns: auto auto auto;
+  grid-row: span;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.people {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-left: 5px;
+  justify-content: center;
+}
+
+.people h3 {
+  justify-self: center;
+}
