@@ -5,12 +5,12 @@ import { Landing } from './pages/landing';
 import { Login } from './pages/login';
 import { Recuperar } from './pages/recuperar';
 import { useAuth } from './hooks/useAuth';
-import { Films } from './pages/landing/films';
-import { People } from './pages/landing/people';
-import { Starships } from './pages/landing/starships';
-import { Vehicles } from './pages/landing/vehicles';
-import { Planets } from './pages/landing/planets';
-import { Species } from './pages/landing/species';
+import { Films } from './pages/landing/Films';
+import { People } from './pages/landing/People';
+import { Starships } from './pages/landing/Starships';
+import { Vehicles } from './pages/landing/Vehicles';
+import { Planets } from './pages/landing/Planets';
+import { Species } from './pages/landing/Species';
 
 function RoutingComponent() {
 	const { authState } = useAuth();
