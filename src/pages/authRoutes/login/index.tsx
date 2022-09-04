@@ -3,9 +3,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from '../../components/header';
-import { userLoginType } from '../../contexts/authProvider';
-import { useAuth } from '../../hooks/useAuth';
+import { Header } from '../../../components/header';
+import { userLoginType } from '../../../contexts/authProvider';
+import { useAuth } from '../../../hooks/useAuth';
 
 export const Login = () => {
 	const [email, setEmail] = useState('');

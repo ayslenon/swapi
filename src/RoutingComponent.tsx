@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Cadastro } from './pages/cadastro';
+import { Cadastro } from './pages/authRoutes/cadastro';
 
 import { Landing } from './pages/landing';
-import { Login } from './pages/login';
-import { Recuperar } from './pages/recuperar';
+import { Login } from './pages/authRoutes/login';
+import { Recuperar } from './pages/authRoutes/recuperar';
 import { useAuth } from './hooks/useAuth';
 import { Films } from './pages/landing/Films';
 import { People } from './pages/landing/People';
@@ -11,6 +11,8 @@ import { Starships } from './pages/landing/Starships';
 import { Vehicles } from './pages/landing/Vehicles';
 import { Planets } from './pages/landing/Planets';
 import { Species } from './pages/landing/Species';
+import { StarshipModal } from './components/modals/StarshipsModal';
+import { PeopleModal } from './components/modals/PeopleModal';
 
 function RoutingComponent() {
 	const { authState } = useAuth();
@@ -18,15 +20,19 @@ function RoutingComponent() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Landing />}>
-					<Route path="people" element={<People />} />
-					<Route path="starships" element={<Starships />} />
+					<Route path="people" element={<People />}>
+						<Route path=":id" element={<PeopleModal />} />
+					</Route>
+					<Route path="starships" element={<Starships />}>
+						<Route path=":id" element={<StarshipModal />} />
+					</Route>
 					<Route path="vehicles" element={<Vehicles />} />
 					<Route path="planets" element={<Planets />} />
 					<Route path="species" element={<Species />} />
 					<Route path="films" element={<Films />} />
 				</Route>
 				<Route
-					path="/cadastro"
+					path="cadastro"
 					element={
 						authState.loggedUser.username != '' ? (
 							<Navigate to="/" />
@@ -37,7 +43,7 @@ function RoutingComponent() {
 				/>
 				;
 				<Route
-					path="/login"
+					path="login"
 					element={
 						authState.loggedUser.username != '' ? (
 							<Navigate to="/" />
@@ -48,7 +54,7 @@ function RoutingComponent() {
 				/>
 				;
 				<Route
-					path="/recuperar"
+					path="recuperar"
 					element={
 						authState.loggedUser.username != '' ? (
 							<Navigate to="/" />
