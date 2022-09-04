@@ -18,9 +18,9 @@
 ## Detalhes de implementação
 - temos uma fake JWT que simula login de usuários
 - temos 3 usuários fakes autorizados a logar
--- durante a aplicação rodando podemos adicionar mais usuários no context, mas ao fechar e abrir de novo teremos os mesmo 3 usuráios sempre
--- após logar, a sessão é salva no localstorage até vocês deslogar
+- durante a aplicação rodando podemos adicionar mais usuários no context, mas ao fechar e abrir de novo teremos os mesmo 3 usuráios sempre
+- após logar, a sessão é salva no localstorage até vocês deslogar
 - é permitido, além de login, logout e cadastro, fazer também a alteração da senha de um usuário já existente
 - para listagem dos personangens, naves, veiculos, planetas, espécies e filmes todos os usuários podem acessar a páginação e explorar algumas informações de cada elemento
--- para informações mais detalhadas sobre personagens e naves é necessário estar logado na aplicação, depois de logar o usuário pode acessar estas duas áreas restritas
--- após algumas interações específicas com o usuários são mostrados toasts para guiá-lo em uma próxima ação
+- para informações mais detalhadas sobre personagens e naves é necessário estar logado na aplicação, depois de logar o usuário pode acessar estas duas áreas restritas
+- após algumas interações específicas com o usuários são mostrados toasts para guiá-lo em uma próxima ação
